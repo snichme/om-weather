@@ -3,7 +3,7 @@
 (b/build "src/cljs"
   {:output-to          "resources/public/js/app.js"
    :output-dir         "resources/public/js"
-   :optimizations      :simple
+   :optimizations      :advanced
    :static-fns         true
    :optimize-constants true
    :pretty-print       true

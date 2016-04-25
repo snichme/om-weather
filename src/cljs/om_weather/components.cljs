@@ -1,6 +1,10 @@
 (ns om-weather.components
-  (:require [om.dom :as dom]
-            [om.next :as om :refer-macros [defui]]))
+  (:require
+   [om.dom :as dom]
+   [cljs.test :as t :include-macros true]
+   [om.next :as om :refer-macros [defui]])
+  (:require-macros
+   [devcards.core :as dc :refer [defcard deftest]]))
 
 (defui Navigation
   Object
@@ -50,11 +54,24 @@
           (str "Right now it's " (kelvinToCelcius (get main "temp")) " °C and " (get weather "description") "."
             "It's been at most " (kelvinToCelcius (get main "temp_max")) " °C today."))))))
 
+(defcard uu
+  "HEllo devcards")
+
+(defcard t
+  (fn [state _]
+    (weather-card (:weather @state) (:main @state)))
+  {:weather {"icon" "a" "description" "somewhat cloudy"}
+   :main {"temp" 300 "temp_max" 350}})
+
+(deftest math
+  "Is 1 = 1?"
+  (t/is (= 1 10)))
+
 (defn weather-details [data]
   (let [list [["Wind" (str (get-in data ["wind" "speed"]) " m/s")]
               ["Pressure" (str (get-in data ["main" "pressure"]) " hpa")]
               ["Humidity" (str (get-in data ["main" "humidity"]) " %")]
-              ["Max temp" (str (kelvinToCelcius (get-in data ["main" "max_temp"])) " m/s")]
+              ["Maximum temp" (str (kelvinToCelcius (get-in data ["main" "max_temp"])) " m/s")]
               ["Min temp" (str (kelvinToCelcius (get-in data ["main" "min_temp"])) " m/s")]]]
     (dom/ul #js {:className "collection z-depth-1"}
       (for [item list]

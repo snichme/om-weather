@@ -9,6 +9,7 @@
   :dependencies [[org.clojure/clojure "1.8.0-RC5"]
                  [org.clojure/clojurescript "1.7.228"]
                  [com.datomic/datomic-free "0.9.5344"]
+                 [devcards "0.2.1-6"]
                  [bidi "1.25.0"]
                  [org.omcljs/om "1.0.0-alpha30"]
                  [ring/ring "1.4.0"]
